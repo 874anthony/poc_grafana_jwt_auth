@@ -1,0 +1,35 @@
+services:
+  grafana:
+    image: grafana/grafana-enterprise
+    ports:
+      - "3000:3000"
+    environment:
+      GF_INSTALL_PLUGINS: "grafana-bigquery-datasource"
+    volumes:
+      - type: bind
+        source: ./provisioning/datasources/datasources.yaml
+        target: /etc/grafana/provisioning/datasources/datasources.yaml
+      - type: bind
+        source: ./config/grafana/grafana.ini
+        target: /etc/grafana/grafana.ini
+      - type: bind
+        source: ./config/grafana/jwks.json
+        target: /home/grafana/jwks.json
+      - type: bind
+        source: ./provisioning/dashboards/providers.yaml
+        target: /etc/grafana/provisioning/dashboards/providers.yaml
+      - type: bind
+        source: ./provisioning/dashboards/providersReport.json
+        target: /var/lib/grafana/dashboards/providersReport.json
+  proxy:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: ./config/nginx/default.conf
+        target: /etc/nginx/conf.d/default.conf
+    depends_on:
+      - grafana
+
+  
