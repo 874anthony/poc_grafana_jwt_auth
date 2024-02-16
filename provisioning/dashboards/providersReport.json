@@ -1,47 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "BigQuery DS",
-      "label": "grafana-bigquery-datasource",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "grafana-bigquery-datasource",
-      "pluginName": "Google BigQuery"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "barchart",
-      "name": "Bar chart",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "10.4.0-65875"
-    },
-    {
-      "type": "datasource",
-      "id": "grafana-bigquery-datasource",
-      "name": "Google BigQuery",
-      "version": "1.4.1"
-    },
-    {
-      "type": "panel",
-      "id": "piechart",
-      "name": "Pie chart",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -61,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -70,6 +27,141 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "# de cotizaciones",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "tender_name (count)"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 8,
+          "refId": "A"
+        }
+      ],
+      "title": "Estado general de tus cotizaciones",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "tender_name": {
+                "aggregations": [
+                  "count"
+                ],
+                "operation": "aggregate"
+              },
+              "tenderapplication_status": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -88,12 +180,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
+        "h": 6,
+        "w": 8,
+        "x": 8,
         "y": 0
       },
-      "id": 7,
+      "id": 3,
       "options": {
         "legend": {
           "displayMode": "list",
@@ -119,17 +211,17 @@
             "type": "datasource",
             "uid": "-- Dashboard --"
           },
-          "panelId": 1,
+          "panelId": 8,
           "refId": "A"
         }
       ],
-      "title": "Cotizaciones envíadas por constructora",
+      "title": "Cotizaciones enviadas por colaborador",
       "transformations": [
         {
           "id": "groupBy",
           "options": {
             "fields": {
-              "constructor_principal_username": {
+              "provider_employee_name": {
                 "aggregations": [],
                 "operation": "groupby"
               },
@@ -211,9 +303,9 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
+        "h": 6,
+        "w": 7,
+        "x": 16,
         "y": 0
       },
       "id": 4,
@@ -249,7 +341,7 @@
             "type": "datasource",
             "uid": "-- Dashboard --"
           },
-          "panelId": 1,
+          "panelId": 8,
           "refId": "A"
         }
       ],
@@ -274,221 +366,6 @@
         }
       ],
       "type": "barchart"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "# de cotizaciones",
-            "axisPlacement": "auto",
-            "fillOpacity": 80,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineWidth": 1,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unitScale": true
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "tender_name (count)"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 8
-      },
-      "id": 6,
-      "options": {
-        "barRadius": 0,
-        "barWidth": 0.97,
-        "fullHighlight": false,
-        "groupWidth": 0.7,
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "orientation": "auto",
-        "showValue": "auto",
-        "stacking": "none",
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        },
-        "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 0
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Estado general de tus cotizaciones",
-      "transformations": [
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "tender_name": {
-                "aggregations": [
-                  "count"
-                ],
-                "operation": "aggregate"
-              },
-              "tenderapplication_status": {
-                "aggregations": [],
-                "operation": "groupby"
-              }
-            }
-          }
-        }
-      ],
-      "type": "barchart"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": [],
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 8
-      },
-      "id": 3,
-      "options": {
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "pieType": "pie",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Cotizaciones enviadas por colaborador",
-      "transformations": [
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "provider_employee_name": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "tender_name": {
-                "aggregations": [
-                  "count"
-                ],
-                "operation": "aggregate"
-              }
-            }
-          }
-        }
-      ],
-      "type": "piechart"
     },
     {
       "datasource": {
@@ -540,10 +417,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 6,
+        "w": 8,
         "x": 0,
-        "y": 16
+        "y": 6
       },
       "id": 5,
       "options": {
@@ -574,7 +451,7 @@
             "type": "datasource",
             "uid": "-- Dashboard --"
           },
-          "panelId": 1,
+          "panelId": 8,
           "refId": "A"
         }
       ],
@@ -605,6 +482,89 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 6
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 8,
+          "refId": "A"
+        }
+      ],
+      "title": "Cotizaciones envíadas por constructora",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "constructor_name": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "constructor_principal_username": {
+                "aggregations": []
+              },
+              "tender_name": {
+                "aggregations": [
+                  "count"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
       "description": "Se filtra por las ciudad donde fueron cotizadas",
       "fieldConfig": {
         "defaults": {
@@ -624,10 +584,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 16
+        "h": 6,
+        "w": 7,
+        "x": 16,
+        "y": 6
       },
       "id": 2,
       "options": {
@@ -657,7 +617,7 @@
             "type": "datasource",
             "uid": "-- Dashboard --"
           },
-          "panelId": 1,
+          "panelId": 8,
           "refId": "A"
         }
       ],
@@ -708,7 +668,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -721,12 +682,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
-        "w": 20,
+        "h": 9,
+        "w": 23,
         "x": 0,
-        "y": 24
+        "y": 12
       },
-      "id": 1,
+      "id": 8,
       "options": {
         "cellHeight": "sm",
         "footer": {
@@ -739,7 +700,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.0-65875",
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
@@ -751,7 +712,7 @@
           "location": "US",
           "project": "corded-rope-396121",
           "rawQuery": true,
-          "rawSql": "SELECT * FROM `corded-rope-396121.mongo_production.ProvidersReportGold` \r\nWHERE provider_id = '58caaf32bcad7665dc4d8ab3'",
+          "rawSql": "SELECT * FROM `corded-rope-396121.mongo_production.ProvidersReportGold` \r\nWHERE provider_id = '$provider_id'",
           "refId": "A",
           "sql": {
             "columns": [
@@ -772,7 +733,7 @@
           }
         }
       ],
-      "title": "Panel Title",
+      "title": "Data Table",
       "type": "table"
     }
   ],
@@ -780,7 +741,15 @@
   "schemaVersion": 39,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "hide": 2,
+        "name": "provider_id",
+        "query": "",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -790,6 +759,6 @@
   "timezone": "",
   "title": "Providers",
   "uid": "edcau8ua13dhcc",
-  "version": 9,
+  "version": 15,
   "weekStart": ""
 }
