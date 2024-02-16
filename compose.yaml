@@ -22,7 +22,7 @@ services:
         source: ./provisioning/dashboards/providersReport.json
         target: /var/lib/grafana/dashboards/providersReport.json
   proxy:
-    build: .
+    image: nginx:latest
     ports:
       - "80:80"
     volumes:
